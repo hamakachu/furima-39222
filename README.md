@@ -1,24 +1,63 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## userテーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| nickname           | string | null: false |
+| family_name        | string | null: false |
+| first_name         | string | null: false |
+| family_kana        | string | null: false |
+| first_kana         | string | null: false |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :purchases
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| item_name     | string     | null: false                    |
+| introduce     | text       | null: false                    |
+| category      | string     | null: false                    |
+| condition     | string     | null: false                    |
+| price         | integer    | null: false                    |
+| shipping_date | string     | null: false                    |
+| user_id       | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_one :purchase
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchasesテーブル
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
 
-* Deployment instructions
 
-* ...
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping
+
+
+## shippingsテーブル
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| postal_cord | string     | null: false                    |
+| prefecture  | string     | null: false                    |
+| city        | string     | null: false                    | 
+| address     | string     | null: false                    |
+| building    | string     | null: true                     |
+| phone       | integer    | null: false                    |
+| purchase_id | references | null: false, foreign_key: true |
+
+
+### Association
+belongs_to :purchase
