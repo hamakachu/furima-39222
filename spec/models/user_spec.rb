@@ -84,20 +84,27 @@ RSpec.describe User, type: :model do
       it 'passwordが129文字以上' do
         @user.password = Faker::Internet.password(min_length: 129)
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
       it 'family_nameに全角かな以外が含まれる' do
-        @user.family_name = 
+        @user.family_name = Gimei.family.kanji + "a"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name is invalid")
       end
       it 'first_nameに全角かな以外が含まれる' do
-
+        @user.first_name = Gimei.first.kanji + "a"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
       end
       it 'family_kanaが全角カナ以外が含まれる' do
-
+        @user.family_kana = Gimei.family.katakana + "a"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family kana is invalid")
       end
       it 'first_kanaが全角カナ以外が含まれる' do
-
+        @user.first_kana = Gimei.first.katakana + "a"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First kana is invalid")
       end
     end
   end
