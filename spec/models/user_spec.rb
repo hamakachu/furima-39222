@@ -60,13 +60,23 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
-      it 'mailに@がない' do
+      it 'emailに@がない' do
         @user.email = "testmail"
         @user.valid?
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
-      it 'passwordが英数混合でない' do
+      it 'passwordが数字のみ' do
         @user.password = "123456"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordが英字のみ' do
+        @user.password = "abcdef"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordが全角文字を含む' do
+        @user.password = Faker::Internet.password(min_length: 6) + "あ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
