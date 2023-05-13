@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :condition
   belongs_to :charge_bearer
-  
+  belongs_to :prefecture
 
   validates :item_name, :introduce, presence: true
   validates :category_id, :condition_id, :charge_bearer_id, :prefecture_id, :shipping_date_id, numericality: 
