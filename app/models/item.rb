@@ -13,6 +13,5 @@ class Item < ApplicationRecord
   validates :introduce, presence: true, length: {maximum: 1000}
   validates :category_id, :condition_id, :charge_bearer_id, :prefecture_id, :shipping_date_id, numericality: 
             { other_than: 1, message: "can't be blank" }
-  validates :price, numericality: {greater_than: 299, less_than: 10000000}
-
+  validates :price, numericality: {greater_than: 299, less_than: 10000000, only_integer: true}
 end

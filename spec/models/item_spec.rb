@@ -87,6 +87,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
+      it 'priceに少数が入っている' do
+        @item.price = 1000.1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be an integer")
+      end
       it 'ユーザーが紐づいていない' do
         @item.user = nil
         @item.valid?
