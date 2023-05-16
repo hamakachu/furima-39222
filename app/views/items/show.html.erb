@@ -24,7 +24,7 @@
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user.id %>
-      <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+      <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
       <p class="or-text">or</p>
       <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% end %>
@@ -45,11 +45,11 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= Category.find(@item.charge_bearer_id).name %></td>
+          <td class="detail-value"><%= Category.find(@item.category_id).name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= Condition.find(@item.charge_bearer_id).name %></td>
+          <td class="detail-value"><%= Condition.find(@item.condition_id).name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
@@ -57,11 +57,11 @@
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= Prefecture.find(@item.charge_bearer_id).name %></td>
+          <td class="detail-value"><%= Prefecture.find(@item.prefecture_id).name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= ShippingDate.find(@item.charge_bearer_id).name %></td>
+          <td class="detail-value"><%= ShippingDate.find(@item.shipping_date_id).name %></td>
         </tr>
       </tbody>
     </table>
