@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :charge_bearer
   belongs_to :prefecture
   belongs_to :shipping_date
+  has_one :purchase
 
   validates :image, presence: true
   validates :item_name, presence: true, length: {maximum: 40}
