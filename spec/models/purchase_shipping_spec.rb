@@ -29,6 +29,11 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Postal code can't be blank")
       end
+      it 'prefucture_idが1'  do
+        @purchase_shipping.prefecture_id = 1
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it 'cityが空' do
         @purchase_shipping.city = ""
         @purchase_shipping.valid?

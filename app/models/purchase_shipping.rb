@@ -7,7 +7,7 @@ class PurchaseShipping
     validates :user_id, :item_id, :city, :address, :token
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/ }
     validates :phone, format: {with: /\A\d{10,11}\z/}
-    validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
+    validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
     end
 
 
